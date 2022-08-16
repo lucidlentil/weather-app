@@ -43,11 +43,17 @@ let enterCity = document.querySelector("#enter-city");
 let cityName = document.querySelector("#city-name");
 let todayHigh = document.querySelector(".todayHigh");
 let todayLow = document.querySelector(".todayLow");
+let humidity = document.querySelector("#humidity");
+let wind = document.querySelector("#wind");
+let description = document.querySelector(".current-conditions");
 
 function getWeather(response) {
   console.log();
   todayHigh.innerHTML = Math.round(response.data.main.temp_max);
   todayLow.innerHTML = Math.round(response.data.main.temp_min);
+  humidity.innerHTML = response.data.main.humidity;
+  wind.innerHTML = Math.round(response.data.wind.speed);
+  description.innerHTML = response.data.weather[0].main;
 }
 
 function changeCity(event) {
@@ -89,3 +95,37 @@ function changeToFarenheit(event) {
 farenheitLink.addEventListener("click", changeToFarenheit);
 
 //Conversion back to celsius to be added
+
+//let weather = {
+//  paris: {
+//    temp: 19.7,
+//  humidity: 80
+//  },
+//  tokyo: {
+//    temp: 17.3,
+//    humidity: 50
+//  },
+//  lisbon: {
+//    temp: 30.2,
+//    humidity: 20
+//  },
+//  "san francisco": {
+//    temp: 20.9,
+//    humidity: 100
+//  },
+//  oslo: {
+//    temp: -5,
+//    humidity: 20
+//  }
+//};
+//function whatCity() {
+//    let city = prompt("Enter a city");
+//    city = city.trim();
+//    city = city.toLowerCase();
+//    if (weather[city] !== undefined) {
+//        alert(`It is currently ${Math.round(weather[city].temp)}°C (${Math.round(weather[city].temp * 1.8 + 32)})°F in ${city} with a humidity level of ${weather[city].humidity}%`);
+//    } else {
+//        alert(`Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather`)
+//    }
+//}
+//whatCity();
