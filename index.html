@@ -20,22 +20,22 @@
     <div class="container">
         <div class="weather-container">
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <header>
                         <h1><span class="name-city" id="city-name">Christchurch</span> <br />
-                            <span class="time-date" id="date-time">Friday, July 15th</span>
+                            <span class="time-date">Last updated </span><span class="time-date" id="date-time">Friday, July 15th</span>
                         </h1>
                     </header>
                     <div class="row">
-                        <div class="col-6">
-                            <i class="fa-solid fa-cloud-sun current-icon"></i>
-                            <div><i class="fa-solid fa-temperature-three-quarters temp-icon"></i><span
-                                    class="todayHigh">10</span><span> </span><span class="todayLow">8</span>
-                                <span class="change-unit"><a href="#" id="celsius">°C </a> | <a href="#" id="farenheit">
+                        <div class="col">
+                            <img src="" alt="" class="current-icon"/>
+                            <div><i class="fa-solid fa-temperature-three-quarters temp-icon"></i>
+                                <span class="todayHigh"></span><span> </span><span class="todayLow"></span>
+                                <span class="change-unit"><a href="#" id="celsius-link" class="active">°C </a> | <a href="#" id="fahrenheit-link">
                                         °F</a></span>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <div class="current-conditions">Mostly fine</div>
                             <div class="current-details">
                                 Humidity: <span id="humidity">89</span>%<br />
@@ -43,7 +43,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+            <section>
+                <form id="search-form">
+                    <input type="search" id="enter-city" placeholder="Search for a city" class="search-bar">
+                    <input type="submit" class="btn btn-success" value="Search">
+                </form>
+                <button type="button" class="btn btn-primary location-button">Current city</button>    
+            </section>
+        </div>
+    </div>
+    </div>
+    <div class="github"><a href="https://github.com/lucidlentil/weather-app">Open-source coded </a>by Greta
+        Snowling-Roach</div>
+    <script src="src/script.js"></script>
+</body>
+
+</html>
+
+<!-- <div class="col-6">
                     <div class="future-container">
                         <span class="weekdays">Sat </span>
                         <i class="fa-solid fa-cloud future-icons"></i><span class="future-high"> 10C° </span><span
@@ -69,26 +86,4 @@
                         <i class="fa-solid fa-cloud-showers-heavy future-icons"></i><span class="future-high"> 10C°
                         </span><span class="future-low">5C°</span>
                     </div>
-                </div>
-                <section>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <form id="search-form">
-                            <input type="search" id="enter-city" placeholder="Enter city name" class="search-bar">
-                            <input type="submit" class="btn btn-success" value="Search">
-                        </form>
-                    </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-primary location-button">Current city</button>
-                    </div>
-            </div>
-            </section>
-        </div>
-    </div>
-    </div>
-    <div class="github"><a href="https://github.com/lucidlentil/weather-app">Open-source coded </a>by Greta
-        Snowling-Roach</div>
-    <script src="src/script.js"></script>
-</body>
-
-</html>
+                </div>-->

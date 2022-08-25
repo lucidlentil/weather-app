@@ -3,7 +3,7 @@ body {
 }
 
 .weather-container {
-    margin: 50px 200px;
+    margin: 50px 350px;
     border: 0.5px solid;
     border-color: #afadad;
     padding: 15px;
@@ -20,7 +20,7 @@ header {
     padding-left: 20px;
 }
 
-.name-city {
+#city-name {
     font-weight: 900;
     font-size: 60px;
 }
@@ -30,39 +30,41 @@ header {
 }
 
 .current-icon {
-    font-size: 130px;
-    color: rgb(79, 72, 97);
-    padding: 10px 10px;
+    margin-left: 50px; 
+    height: 150px; 
+    width: 150px;
 }
 
 .current-conditions {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 900;
+    margin-right: 0px; 
 }
 
 .current-details {
+    font-size: 24px; 
     font-weight: 700;
-    padding-left: 10px;
     margin-bottom: 5px;
 }
 
 .temp-icon {
     color: rgb(79, 72, 97);
-    font-size: 38px;
+    font-size: 42px;
+    margin-left: 20px; 
 }
 
 .todayHigh {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: bold;
 }
 
 .todayLow {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
 }
 
 a {
-    font-size: 18px;
+    font-size: 22px;
     margin-top: 3px;
     font-weight: bold;
     text-decoration: none;
@@ -85,6 +87,7 @@ a {
 
 .search-bar {
     position: relative;
+    width: 250px; 
     bottom: 10px;
     border-radius: 10px;
     border: 0.5px solid;
@@ -96,13 +99,14 @@ a {
 
 .btn-success {
     position: relative;
+    left: 5px; 
     bottom: 10px;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
 .location-button {
     position: relative;
-    left: 250px;
+    left: 350px;
     bottom: 48px;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
@@ -144,4 +148,14 @@ a {
 }
 .github { 
     text-align: center; 
+}
+.current-conditions:first-letter {
+    text-transform: capitalize; 
+}
+.change-unit .active {
+    color: rgb(33, 33, 33); 
+    cursor: default; 
+}
+.change-unit .active:hover {
+    text-decoration: none; 
 }

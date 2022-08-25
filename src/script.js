@@ -31,6 +31,10 @@ if (hours < 10) {
   hours = `0${hours}`;
 }
 let minutes = now.getMinutes();
+if (minutes <10) {
+  minutes = `0${minutes}`
+};
+
 function dateTime() {
   let currentDateTime = document.querySelector("#date-time");
   currentDateTime.innerHTML = `${day} ${date} ${month}, ${hours}:${minutes}`;
@@ -38,61 +42,98 @@ function dateTime() {
 dateTime();
 
 //Search button - when a user searches for a city, it should display the name of the city on the result page and the current temp of the city
-let searchForm = document.querySelector("#search-form");
-let enterCity = document.querySelector("#enter-city");
-let cityName = document.querySelector("#city-name");
-let todayHigh = document.querySelector(".todayHigh");
-let todayLow = document.querySelector(".todayLow");
-let humidity = document.querySelector("#humidity");
-let wind = document.querySelector("#wind");
-let description = document.querySelector(".current-conditions");
 
 function getWeather(response) {
-  console.log();
+  console.log(response.data);
+  let todayHigh = document.querySelector(".todayHigh");
+  let todayLow = document.querySelector(".todayLow");
+  let cityName = document.querySelector("#city-name");
+  let humidity = document.querySelector("#humidity");
+  let wind = document.querySelector("#wind");
+  let description = document.querySelector(".current-conditions");
+  let icon = document.querySelector(".current-icon");
+
+  celsiusHigh = response.data.main.temp_max; 
+  celsiusLow = response.data.main.temp_min; 
+
   todayHigh.innerHTML = Math.round(response.data.main.temp_max);
   todayLow.innerHTML = Math.round(response.data.main.temp_min);
   humidity.innerHTML = response.data.main.humidity;
   wind.innerHTML = Math.round(response.data.wind.speed);
-  description.innerHTML = response.data.weather[0].main;
+  description.innerHTML = response.data.weather[0].description;
+  cityName.innerHTML = response.data.name; 
+  icon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  icon.setAttribute("alt", response.data.weather[0].description); 
+  
 }
 
-function changeCity(event) {
-  event.preventDefault();
-  let city = enterCity.value;
-  let units = "metric";
+function search(city) {
   let apiKey = "74ca054ff55e08af1a7a77572c080cfe";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
-  cityName.innerHTML = `${city}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(getWeather);
 }
-searchForm.addEventListener("submit", changeCity);
+
+function handleSubmit(event) {
+  event.preventDefault(); 
+  let enterCity = document.querySelector("#enter-city");
+  search(enterCity.value); 
+}
+
 
 //Not working :( will update after watching solution - Add a Current Location button. When clicking it, it should use the geolocation API to get your GPS coordinates and display the city and current temperature using the OpenWeather API
 let locationButton = document.querySelector(".location-button");
 
-function getLocation(position) {
+function findLocation(position) {
+  let apiKey = "74ca054ff55e08af1a7a77572c080cfe";
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  let city = response.data.name;
   let unit = "metric";
-  let apiKey = "74ca054ff55e08af1a7a77572c080cfe";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${unit}`;
-  cityName.innerHTML = `${city}`;
   axios.get(apiUrl).then(getWeather);
 }
-navigator.geolocation.getCurrentPosition(getLocation);
+
+function getLocation(event) {
+  event.preventDefault(); 
+  navigator.geolocation.getCurrentPosition(findLocation);
+}
+
 locationButton.addEventListener("click", getLocation);
 
-//To farenheit:
-let farenheitLink = document.querySelector("#farenheit");
-function changeToFarenheit(event) {
-  event.preventDefault();
-  let tempHigh = todayHigh.innerHTML;
-  let tempLow = todayLow.innerHTML;
-  todayHigh.innerHTML = Math.round((tempHigh * 9) / 5 + 32);
-  todayLow.innerHTML = Math.round((tempLow * 9) / 5 + 32);
+function displayFahrenheit(event) {
+    event.preventDefault(); 
+    let todayHigh = document.querySelector(".todayHigh");
+    let todayLow = document.querySelector(".todayLow");
+    celsiusLink.classList.remove("active"); 
+    fahrenheitLink.classList.add("active"); 
+    let fahrenheitHigh = (celsiusHigh * 9) / 5 + 32; 
+    let fahrenheitLow = (celsiusLow * 9) / 5 + 32;
+    todayLow.innerHTML = Math.round(fahrenheitLow);
+    todayHigh.innerHTML = Math.round(fahrenheitHigh); 
 }
-farenheitLink.addEventListener("click", changeToFarenheit);
+
+function displayCelsius(event) {
+  event.preventDefault(); 
+  let todayHigh = document.querySelector(".todayHigh");
+  let todayLow = document.querySelector(".todayLow");
+  fahrenheitLink.classList.remove("active"); 
+  celsiusLink.classList.add("active"); 
+  todayHigh.innerHTML = Math.round(celsiusHigh); 
+  todayLow.innerHTML = Math.round(celsiusLow); 
+}
+
+let celsiusHigh = null;
+let celsiusLow = null;  
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link"); 
+fahrenheitLink.addEventListener("click", displayFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link"); 
+celsiusLink.addEventListener("click", displayCelsius);
+
+search("Christchurch");
 
 //Conversion back to celsius to be added
 
