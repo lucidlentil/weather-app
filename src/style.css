@@ -159,3 +159,17 @@ a {
 .change-unit .active:hover {
     text-decoration: none; 
 }
+.forecast {
+    text-align: center; 
+    font-size: 24px; 
+    margin-top: 10px; 
+}
+.forecast-temp {
+    font-size: 20px; 
+}
+.forecast-high {
+    font-weight: bold; 
+}
+.forecast-low {
+    opacity: 0.7; 
+}
