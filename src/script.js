@@ -79,8 +79,6 @@ function handleSubmit(event) {
   search(enterCity.value); 
 }
 
-
-//Not working :( will update after watching solution - Add a Current Location button. When clicking it, it should use the geolocation API to get your GPS coordinates and display the city and current temperature using the OpenWeather API
 let locationButton = document.querySelector(".location-button");
 
 function findLocation(position) {
@@ -121,6 +119,31 @@ function displayCelsius(event) {
   todayLow.innerHTML = Math.round(celsiusLow); 
 }
 
+//looping through weekdays and inserting HTML
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast"); 
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function(day) {
+    forecastHTML = forecastHTML + 
+               `<div class="col-2">
+                    <div class="forecast-day">${day}</div>
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="" width="45">
+                    <div class="forecast-temp">
+                        <span class="forecast-high">
+                            20°
+                        </span>
+                        <span class="forecast-low">
+                            13°
+                        </span>
+                    </div>
+                </div>`; 
+  });
+  forecastHTML = forecastHTML + `</div>`;        
+          
+  forecastElement.innerHTML = forecastHTML; 
+}
+
 let celsiusHigh = null;
 let celsiusLow = null;  
 
@@ -134,39 +157,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsius);
 
 search("Christchurch");
-
-//Conversion back to celsius to be added
-
-//let weather = {
-//  paris: {
-//    temp: 19.7,
-//  humidity: 80
-//  },
-//  tokyo: {
-//    temp: 17.3,
-//    humidity: 50
-//  },
-//  lisbon: {
-//    temp: 30.2,
-//    humidity: 20
-//  },
-//  "san francisco": {
-//    temp: 20.9,
-//    humidity: 100
-//  },
-//  oslo: {
-//    temp: -5,
-//    humidity: 20
-//  }
-//};
-//function whatCity() {
-//    let city = prompt("Enter a city");
-//    city = city.trim();
-//    city = city.toLowerCase();
-//    if (weather[city] !== undefined) {
-//        alert(`It is currently ${Math.round(weather[city].temp)}°C (${Math.round(weather[city].temp * 1.8 + 32)})°F in ${city} with a humidity level of ${weather[city].humidity}%`);
-//    } else {
-//        alert(`Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather`)
-//    }
-//}
-//whatCity();
+displayForecast(); 
