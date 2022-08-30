@@ -22,24 +22,25 @@
             <div class="row">
                 <div class="col">
                     <header>
-                        <h1><span class="name-city" id="city-name">Christchurch</span> <br />
-                            <span class="time-date">Last updated </span><span class="time-date" id="date-time">Friday, July 15th</span>
+                        <h1><span class="name-city" id="city-name"></span> <br/>
+                            <span class="time-date">Last updated </span><span class="time-date" id="date-time"></span>
                         </h1>
                     </header>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-6">
                             <img src="" alt="" class="current-icon"/>
-                            <div><i class="fa-solid fa-temperature-three-quarters temp-icon"></i>
+                            <div class="temp-section"><i class="fa-solid fa-temperature-three-quarters temp-icon"></i>
                                 <span class="todayHigh"></span><span> </span><span class="todayLow"></span>
-                                <span class="change-unit"><a href="#" id="celsius-link" class="active">°C </a> | <a href="#" id="fahrenheit-link">
-                                        °F</a></span>
+                                <span class="change-unit"><a href="#" id="celsius-link" class="active">°C </a>
+                                    <!--| <a href="#" id="fahrenheit-link">
+                                        °F</a></span>-->
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="current-conditions">Mostly fine</div>
+                        <div class="col-6">
+                            <div class="current-conditions"></div>
                             <div class="current-details">
-                                Humidity: <span id="humidity">89</span>%<br />
-                                Wind: <span id="wind">3</span> km/h </div>
+                                Humidity: <span id="humidity"></span>%<br />
+                                Wind: <span id="wind"></span> km/h </div>
                         </div>
                     </div>
                 </div>
@@ -48,11 +49,14 @@
         </div>
             </section>
             <section>
-                <form id="search-form">
+                <form class="row" id="search-form">
+                    <div class="col-7">
                     <input type="search" id="enter-city" placeholder="Search for a city" class="search-bar">
+                    </div>
+                    <div class="col-5">
                     <input type="submit" class="btn btn-success" value="Search">
-                </form>
-                <button type="button" class="btn btn-primary location-button">Current city</button>    
+                    </div>
+                </form>   
             </section>
         </div>
     </div>
@@ -61,33 +65,4 @@
         Snowling-Roach</div>
     <script src="src/script.js"></script>
 </body>
-
 </html>
-
-<!-- <div class="col-6">
-                    <div class="future-container">
-                        <span class="weekdays">Sat </span>
-                        <i class="fa-solid fa-cloud future-icons"></i><span class="future-high"> 10C° </span><span
-                            class="future-low">-3C°</span>
-                    </div>
-                    <div class="future-container">
-                        <span class="weekdays">Sun </span>
-                        <i class="fa-solid fa-cloud-showers-heavy future-icons"></i> <span class="future-high"> 11C°
-                        </span><span class="future-low">-5C°</span>
-                    </div>
-                    <div class="future-container">
-                        <span class="weekdays">Mon </span>
-                        <i class="fa-solid fa-wind future-icons"></i><span class="future-high"> 18C° </span><span
-                            class="future-low">7C°</span>
-                    </div>
-                    <div class="future-container">
-                        <span class="weekdays">Tue </span>
-                        <i class="fa-solid fa-cloud-sun-rain future-icons"></i><span class="future-high"> 17C°
-                        </span><span class="future-low">5C°</span>
-                    </div>
-                    <div class="future-container">
-                        <span class="weekdays">Wed </span>
-                        <i class="fa-solid fa-cloud-showers-heavy future-icons"></i><span class="future-high"> 10C°
-                        </span><span class="future-low">5C°</span>
-                    </div>
-                </div>-->

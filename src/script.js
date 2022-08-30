@@ -39,10 +39,9 @@ function dateTime() {
   let currentDateTime = document.querySelector("#date-time");
   currentDateTime.innerHTML = `${day} ${date} ${month}, ${hours}:${minutes}`;
 }
-dateTime();
 
-//Search button - when a user searches for a city, it should display the name of the city on the result page and the current temp of the city
 
+//inserting data from API call into current weather conditions HTML
 function getWeather(response) {
   console.log(response.data);
   let todayHigh = document.querySelector(".todayHigh");
@@ -68,6 +67,7 @@ function getWeather(response) {
   getForecast(response.data.coord);
 }
 
+//making API call for forecast section
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
@@ -76,7 +76,7 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast); 
 }
 
-
+//converting index to day names for forecast section
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000); 
   let day = date.getDay(); 
@@ -85,7 +85,7 @@ function formatDay(timestamp) {
   return days[day]; 
 }
 
-//looping through weekdays and inserting HTML
+//looping through weekdays and inserting data into forecast HTML
 function displayForecast(response) {
   let forecast = response.data.daily; 
   let forecastElement = document.querySelector("#forecast"); 
@@ -97,35 +97,35 @@ function displayForecast(response) {
                     <div class="forecast-day">${formatDay(forecastDay.dt)}</div>
                         <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="45">
                     <div class="forecast-temp">
-                        <span class="forecast-high">
+                        <div class="forecast-high">
                             ${Math.round(forecastDay.temp.max)}°
-                        </span>
-                        <span class="forecast-low">
+                        </div>
+                        <div class="forecast-low">
                             ${Math.round(forecastDay.temp.min)}°
-                        </span>
+                        </div>
                     </div>
                 </div>`; 
     }
   });
-  forecastHTML = forecastHTML + `</div>`;        
-          
+  forecastHTML = forecastHTML + `</div>`;              
   forecastElement.innerHTML = forecastHTML; 
 }
 
+//making API call for city search
 function search(city) {
   let apiKey = "74ca054ff55e08af1a7a77572c080cfe";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(getWeather);
 }
 
+//searching for value entered into city search
 function handleSubmit(event) {
   event.preventDefault(); 
   let enterCity = document.querySelector("#enter-city");
   search(enterCity.value); 
 }
 
-let locationButton = document.querySelector(".location-button");
-
+//making API call for current location
 function findLocation(position) {
   let apiKey = "74ca054ff55e08af1a7a77572c080cfe";
   let lat = position.coords.latitude;
@@ -135,13 +135,20 @@ function findLocation(position) {
   axios.get(apiUrl).then(getWeather);
 }
 
-function getLocation(event) {
-  event.preventDefault(); 
+function getLocation() { 
   navigator.geolocation.getCurrentPosition(findLocation);
 }
+getLocation();
 
-locationButton.addEventListener("click", getLocation);
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
 
+dateTime();
+
+
+
+/* functional for current temp, but not for forecast - to work on in fut
+converting temp to farenheit
 function displayFahrenheit(event) {
     event.preventDefault(); 
     let todayHigh = document.querySelector(".todayHigh");
@@ -153,7 +160,7 @@ function displayFahrenheit(event) {
     todayLow.innerHTML = Math.round(fahrenheitLow);
     todayHigh.innerHTML = Math.round(fahrenheitHigh); 
 }
-
+converting back to celsius
 function displayCelsius(event) {
   event.preventDefault(); 
   let todayHigh = document.querySelector(".todayHigh");
@@ -167,13 +174,10 @@ function displayCelsius(event) {
 let celsiusHigh = null;
 let celsiusLow = null;  
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", handleSubmit);
-
 let fahrenheitLink = document.querySelector("#fahrenheit-link"); 
 fahrenheitLink.addEventListener("click", displayFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link"); 
 celsiusLink.addEventListener("click", displayCelsius);
+*/
 
-search("Christchurch");
